@@ -14,12 +14,16 @@ StandingTable::StandingTable(int _x, int _y, int _tableSize) {
     isHovered = false;
     isSelected = false;
     tableSize = _tableSize;
+    color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
 }
 
 void StandingTable::draw() {
+    
     if (isSelected || isHovered) {
-        ofSetColor(100);
+        ofSetColor(color);
     } else
         ofSetColor(200);
+    
+    ofFill();
     ofCircle(x, y, tableSize / 2);
 }

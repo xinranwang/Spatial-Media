@@ -23,9 +23,14 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     if (index1 != -1 && index2 != -1) {
-        strings.push_back( GuitarString(index1, index2, stringsEdge) );
+        strings.push_back( GuitarString(index1, index2, stringsEdge, tables) );
         index1 = -1;
         index2 = -1;
+    }
+    for (int i = 0; i < strings.size(); i++) {
+        strings[i].update();
+        ofPoint p = strings[i].string.getClosestPoint(ofPoint(ofGetMouseX(), ofGetMouseY()));
+        cout << "string" << i << ": " << p.x << ", " << p.y << endl;
     }
 }
 
@@ -37,7 +42,7 @@ void testApp::draw(){
     
     // Draw strings
     for (int i = 0; i < strings.size(); i++) {
-        strings[i].draw(tables);
+        strings[i].draw();
     }
     
     // Draw tables

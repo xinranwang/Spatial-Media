@@ -12,17 +12,27 @@
 #include <iostream>
 #include "ofMain.h"
 #include "StandingTable.h"
-//#include "testApp.h"
+#include "Bob.h"
+#include "Spring.h"
 
 class GuitarString {
 public:
-    GuitarString(int _index1, int _index2, int _stringsEdge);
-    void draw(vector<StandingTable> tables);
+    GuitarString(int _index1, int _index2, int _stringsEdge, vector<StandingTable> _tables);
+    void update();
+    void draw();
+    void makeString();
     
     int index1;
     int index2;
     ofColor color;
     int stringsEdge;
+    ofPolyline string;
+    //ofMesh mesh;
+    ofPoint controlPoint;
+    vector<StandingTable> tables;
+    
+    Bob bob;
+    Spring spring;
 };
 
 #endif /* defined(__FundRaiser__GuitarString__) */

@@ -42,6 +42,8 @@
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		F8F784ED16EA7A38009B8BDF /* StandingTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F784EB16EA7A38009B8BDF /* StandingTable.cpp */; };
 		F8F784F216EA9685009B8BDF /* GuitarString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F784F016EA9685009B8BDF /* GuitarString.cpp */; };
+		F8F784F516ED9A95009B8BDF /* Bob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F784F316ED9A94009B8BDF /* Bob.cpp */; };
+		F8F784F816EDA0AA009B8BDF /* Spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F784F616EDA0AA009B8BDF /* Spring.cpp */; };
 		a29d8c96ae042eceaa1bd4f3cbbf0c9d /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2a5b1fad3f30c8065c396acbb72e5d95 /* NetworkingUtilsWin.cpp */; };
 		ade367465d2a8ebad4c7a8d92a3ef718 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = add194746185e2da11468377f4e88c2f /* IpEndpointName.cpp */; };
 		c4782ecc372420ace0615b749e1d0d6b /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = bc8881b3c8c0a1c45f042e7a9e7b92cc /* OscPrintReceivedElements.cpp */; };
@@ -132,6 +134,10 @@
 		F8F784EC16EA7A38009B8BDF /* StandingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandingTable.h; sourceTree = "<group>"; };
 		F8F784F016EA9685009B8BDF /* GuitarString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuitarString.cpp; sourceTree = "<group>"; };
 		F8F784F116EA9685009B8BDF /* GuitarString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarString.h; sourceTree = "<group>"; };
+		F8F784F316ED9A94009B8BDF /* Bob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bob.cpp; sourceTree = "<group>"; };
+		F8F784F416ED9A94009B8BDF /* Bob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bob.h; sourceTree = "<group>"; };
+		F8F784F616EDA0AA009B8BDF /* Spring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spring.cpp; sourceTree = "<group>"; };
+		F8F784F716EDA0AA009B8BDF /* Spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spring.h; sourceTree = "<group>"; };
 		a2aaa8ca403479e6fcdf920ebcd1682b /* OscHostEndianness.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscHostEndianness.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscHostEndianness.h; sourceTree = SOURCE_ROOT; };
 		ac830b549313d5fa6b1ea74edc099284 /* ofxTSPSPerson.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTSPSPerson.cpp; path = ../../../addons/ofxTSPSReceiver/src/ofxTSPSPerson.cpp; sourceTree = SOURCE_ROOT; };
 		add194746185e2da11468377f4e88c2f /* IpEndpointName.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = IpEndpointName.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.cpp; sourceTree = SOURCE_ROOT; };
@@ -318,6 +324,10 @@
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				F8F784EB16EA7A38009B8BDF /* StandingTable.cpp */,
+				F8F784F316ED9A94009B8BDF /* Bob.cpp */,
+				F8F784F616EDA0AA009B8BDF /* Spring.cpp */,
+				F8F784F716EDA0AA009B8BDF /* Spring.h */,
+				F8F784F416ED9A94009B8BDF /* Bob.h */,
 				F8F784EC16EA7A38009B8BDF /* StandingTable.h */,
 				F8F784F016EA9685009B8BDF /* GuitarString.cpp */,
 				F8F784F116EA9685009B8BDF /* GuitarString.h */,
@@ -500,6 +510,8 @@
 				34f3d1f43536a7cbfcb88a38cbd687e5 /* ofxTSPSScene.cpp in Sources */,
 				F8F784ED16EA7A38009B8BDF /* StandingTable.cpp in Sources */,
 				F8F784F216EA9685009B8BDF /* GuitarString.cpp in Sources */,
+				F8F784F516ED9A95009B8BDF /* Bob.cpp in Sources */,
+				F8F784F816EDA0AA009B8BDF /* Spring.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

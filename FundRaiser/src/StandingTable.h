@@ -22,6 +22,7 @@ public:
     int tableSize;
     bool isHovered;
     bool isSelected;
+    ofColor color;
     
 };
 
