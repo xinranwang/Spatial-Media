@@ -18,6 +18,10 @@ public:
     Bob(float x, float y);
     void update();
     void applyForce(ofVec2f force);
+    void display();
+    void clicked(int mx, int my);
+    void stopDragging();
+    void drag(int mx, int my);
     
     ofVec2f location;
     ofVec2f velocity;

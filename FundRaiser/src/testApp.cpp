@@ -55,6 +55,13 @@ void testApp::draw(){
             tables[i].isHovered = false;
         }
         tables[i].draw();
+        
+        ofSetColor(100);
+        if (tables[i].y < ofGetHeight() / 2) {
+            ofCircle(tables[i].x, stringsEdge, 5);
+        } else {
+            ofCircle(tables[i].x, ofGetHeight() - stringsEdge, 5);
+        }
     }
     
 }

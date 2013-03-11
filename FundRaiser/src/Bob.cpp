@@ -28,3 +28,28 @@ void Bob::applyForce(ofVec2f force) {
     f /= mass;
     acceleration += f;
 }
+
+void Bob::display() {
+    
+}
+
+void Bob::clicked(int mx, int my) {
+    float d = ofDist(mx, my, location.x, location.y);
+    if (d < mass) {
+        dragging = true;
+        dragOffset.x = location.x - mx;
+        dragOffset.y = location.y - my;
+    }
+}
+
+void Bob::stopDragging() {
+    dragging = false;
+}
+
+void Bob::drag(int mx, int my) {
+    if (dragging) {
+        location.x = mx + dragOffset.x;
+        location.y = my + dragOffset.y;
+    }
+    
+}

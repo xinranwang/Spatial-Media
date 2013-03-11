@@ -18,6 +18,7 @@ StandingTable::StandingTable(int _x, int _y, int _tableSize) {
 }
 
 void StandingTable::draw() {
+
     
     if (isSelected || isHovered) {
         ofSetColor(color);
