@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "StandingTable.h"
 #include "GuitarString.h"
+#include "Bob.h"
+#include "Spring.h"
 #include <iostream>
 
 static const int tableSize = 48;
@@ -34,4 +36,7 @@ class testApp : public ofBaseApp{
     
     int index1 = -1;
     int index2 = -1;
+    
+    Bob bob;
+    Spring spring;
 };

@@ -25,11 +25,11 @@ public:
     
     int index1;
     int index2;
-    ofColor color;
+    //ofColor color;
     int stringsEdge;
     ofPolyline string;
     ofMesh mesh;
-    ofPoint controlPoint;
+    //ofPoint controlPoint;
     vector<StandingTable> tables;
     
     Bob bob;

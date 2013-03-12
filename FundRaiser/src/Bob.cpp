@@ -30,7 +30,11 @@ void Bob::applyForce(ofVec2f force) {
 }
 
 void Bob::display() {
-    
+    ofSetColor(175);
+    if (dragging) {
+        ofSetColor(50);
+    }
+    ofCircle(location.x, location.y, mass);
 }
 
 void Bob::clicked(int mx, int my) {
