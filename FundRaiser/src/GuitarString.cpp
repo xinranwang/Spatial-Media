@@ -67,9 +67,12 @@ void GuitarString::update() {
 
 void GuitarString::makeString() {
     string.addVertex(tables[index1].x, stringsEdge);
-
-    string.bezierTo(spring.b.location, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
-    
+    if (prePluck) {
+        string.addVertex(spring.b.location);
+        string.addVertex(ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
+    } else {
+        string.bezierTo(spring.b.location, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
+    }
 }
 
 void GuitarString::draw() {
