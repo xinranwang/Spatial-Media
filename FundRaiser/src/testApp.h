@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxSimpleProjectionMapper.h"
 #include "StandingTable.h"
 #include "GuitarString.h"
 #include "Bob.h"
@@ -40,4 +41,9 @@ class testApp : public ofBaseApp{
     
     Bob bob;
     Spring spring;
+    
+    ofxSimpleProjectionMapper mapper;
+    ofFbo canvas;
+    bool bDrawBounds;
+    bool projectionMode;
 };

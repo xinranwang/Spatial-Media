@@ -7,17 +7,26 @@ void testApp::setup(){
     ofEnableSmoothing();
     //ofSetWindowShape(roomSize * makeBigger, roomSize * makeBigger);
     
+    canvas.allocate(ofGetWidth(), ofGetHeight() - 2 * stringsEdge);
+    canvas.begin();
+    ofClear(0);
+    canvas.end();
+    mapper.initialize(ofGetWidth(), ofGetHeight() - 2 * stringsEdge);
+    mapper.load("mapsettings.txt");
+    bDrawBounds = false;
+    
     // Initiate Tables
     for (int i = 0; i < 18; i++) {
         // Upper
         if (i < 9) {
-            tables.push_back( StandingTable::StandingTable( 150 + i * tableDist / 2, margin + ( i % 2) * tableDist, tableSize) );
+            tables.push_back( StandingTable::StandingTable( 150 + i * tableDist / 2, margin + ( i % 2) * tableDist, tableSize, stringsEdge) );
         }
         // Lower
         else {
-            tables.push_back( StandingTable::StandingTable( 150 + (i - 9) * tableDist / 2, ofGetHeight() - margin - ( (i - 9) % 2) * tableDist, tableSize) );
+            tables.push_back( StandingTable::StandingTable( 150 + (i - 9) * tableDist / 2, ofGetHeight() - margin - ( (i - 9) % 2) * tableDist, tableSize, stringsEdge) );
         }
     }
+    projectionMode = false;
 }
 
 //--------------------------------------------------------------
@@ -28,14 +37,6 @@ void testApp::update(){
         index2 = -1;
     }
 
-    
-    
-//    for (int i = 0; i < strings.size(); i++) {
-//
-//        strings[i].checkPluck(ofGetMouseX(), ofGetMouseY());
-//        strings[i].update();
-//        
-//    }
     list<GuitarString>::iterator i;
     for (i = strings.begin(); i != strings.end(); ) {
         if (!i->checkLife()) {
@@ -46,17 +47,24 @@ void testApp::update(){
         else ++i;
     }
     
-    
     //list<GuitarString>::iterator i;
     for (i = strings.begin(); i != strings.end(); i++) {
 
         i->checkPluck(ofGetMouseX(), ofGetMouseY());
         i->update();
     }
+    
+    mapper.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    if (projectionMode) {
+        canvas.begin();
+        ofTranslate(0, -stringsEdge);
+    }
+    
+    
     ofBackground(0);
     
     // Draw strings
@@ -64,14 +72,7 @@ void testApp::draw(){
     for (i = strings.begin(); i != strings.end(); i++) {
         i->draw();
     }
-//    for (int i = 0; i < strings.size(); i++) {
-//        //if (strings[i].checkLife()) {
-//            strings[i].draw();
-////        } else {
-////            tables[strings[i].index1].isSelected = false;
-////            tables[strings[i].index2].isSelected = false;
-////        }
-//    }
+
     
     // Draw tables
     for (int i = 0; i < tables.size(); i++) {
@@ -84,28 +85,34 @@ void testApp::draw(){
         }
         tables[i].draw();
         
-        // Draw dots
-        ofSetColor(100);
-        ofFill();
-        if (tables[i].y < ofGetHeight() / 2) {
-            ofCircle(tables[i].x, stringsEdge, 5);
-        } else {
-            ofCircle(tables[i].x, ofGetHeight() - stringsEdge, 5);
-        }
-        // Smoothing with noFill
-        ofNoFill();
-        if (tables[i].y < ofGetHeight() / 2) {
-            ofCircle(tables[i].x, stringsEdge, 5);
-        } else {
-            ofCircle(tables[i].x, ofGetHeight() - stringsEdge, 5);
-        }
-    }
 
+    }
+    
+    if (projectionMode) {
+        canvas.end();
+        //ofTranslate(0, stringsEdge);
+        mapper.startMapping();
+        canvas.draw(0,0);
+        mapper.stopMapping();
+    }
+    
+    if ( bDrawBounds ){
+        mapper.drawBoundingBox();
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    if (key == 'p') {
+        projectionMode = !projectionMode;
+    } else if ( key == 's' ){
+        // save to a file
+        mapper.save("mapsettings.txt");
+    } else if ( key == 'd' ){
+        bDrawBounds = !bDrawBounds;
+    } else if ( key == 'f' ) {
+        ofToggleFullscreen();
+    }
 }
 
 //--------------------------------------------------------------
@@ -120,7 +127,7 @@ void testApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-
+    mapper.mouseDragged(x, y);
 }
 
 //--------------------------------------------------------------
@@ -146,12 +153,13 @@ void testApp::mousePressed(int x, int y, int button){
             
         }
     }
-
+    
+    mapper.mousePressed(x, y);
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    mapper.mouseReleased(x, y);
 }
 
 //--------------------------------------------------------------

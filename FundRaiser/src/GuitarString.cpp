@@ -18,13 +18,13 @@ GuitarString::GuitarString(int _index1, int _index2, int _stringsEdge, vector<St
     gravity = stringVec.getPerpendicular();
     
     //controlPoint.set(tables[index2].x, ofGetHeight() - stringsEdge);
-    Bob bob(tables[index2].x, ofGetHeight() - stringsEdge);
-    spring = Spring(tables[index2].x, ofGetHeight() - stringsEdge, 0, 0, pluckDist, bob);
+    Bob bob(tables[index2].dot.x, tables[index2].dot.y);
+    spring = Spring(tables[index2].dot.x, tables[index2].dot.y, 0, 0, pluckDist, bob);
     
     makeString();
     
-    hiddenString.addVertex(tables[index1].x, stringsEdge);
-    hiddenString.addVertex(tables[index2].x, ofGetHeight() - stringsEdge);
+    hiddenString.addVertex(tables[index1].dot);
+    hiddenString.addVertex(tables[index2].dot);
     
     mesh.setupIndicesAuto();
     mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
@@ -96,9 +96,9 @@ void GuitarString::makeString() {
     string.addVertex(tables[index1].x, stringsEdge);
     if (prePluck) {
         string.addVertex(spring.b.location);
-        string.addVertex(ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
+        string.addVertex(tables[index2].dot);
     } else {
-        string.bezierTo(spring.b.location, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
+        string.bezierTo(spring.b.location, tables[index2].dot, tables[index2].dot);
     }
 }
 
@@ -107,9 +107,9 @@ void GuitarString::draw() {
     ofNoFill();
     ofSetLineWidth(3);
     ofSetColor(tables[index1].color);
-    ofLine(tables[index1].x, tables[index1].y, tables[index1].x, stringsEdge);
+    ofLine(tables[index1].x, tables[index1].y, tables[index1].dot.x, tables[index1].dot.y);
     ofSetColor(tables[index2].color);
-    ofLine(tables[index2].x, ofGetHeight() - stringsEdge, tables[index2].x, tables[index2].y);
+    ofLine(tables[index2].dot.x, tables[index2].dot.y, tables[index2].x, tables[index2].y);
 
     mesh.draw();
 //    spring.b.display();

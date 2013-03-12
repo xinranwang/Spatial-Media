@@ -14,7 +14,7 @@
 
 class StandingTable {
 public:
-    StandingTable(int _x, int _y, int _tableSize);
+    StandingTable(int _x, int _y, int _tableSize, int _stringsEdge);
     void draw();
     
     int x;
@@ -22,8 +22,9 @@ public:
     int tableSize;
     bool isHovered;
     bool isSelected;
+    int stringsEdge;
     ofColor color;
-    
+    ofPoint dot;
 };
 
 #endif /* defined(__FundRaiser__StandingTable__) */
