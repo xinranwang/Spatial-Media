@@ -36,17 +36,22 @@ void testApp::update(){
 //        strings[i].update();
 //        
 //    }
-    
     list<GuitarString>::iterator i;
+    for (i = strings.begin(); i != strings.end(); ) {
+        if (!i->checkLife()) {
+            tables[i->index1].isSelected = false;
+            tables[i->index2].isSelected = false;
+            i = strings.erase(i);
+        }
+        else ++i;
+    }
+    
+    
+    //list<GuitarString>::iterator i;
     for (i = strings.begin(); i != strings.end(); i++) {
 
         i->checkPluck(ofGetMouseX(), ofGetMouseY());
         i->update();
-        if (!i->checkLife()) {
-            tables[i->index1].isSelected = false;
-            tables[i->index2].isSelected = false;
-            strings.erase(i);
-        }
     }
 }
 
