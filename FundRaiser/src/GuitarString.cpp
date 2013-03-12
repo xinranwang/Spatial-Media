@@ -59,9 +59,18 @@ void GuitarString::update() {
     ofFloatColor start = tables[index1].color;
     ofFloatColor end = tables[index2].color;
     
-    for (int i = 0; i < string.size(); i++) {
-        mesh.addVertex(string[i]);
-        mesh.addColor( start.lerp(end, (float) i / string.size()) );
+    // if string is not curved, color mapping is different
+    if (prePluck) {
+        for (int i = 0; i < string.size(); i++) {
+            mesh.addVertex(string[i]);
+            ofPoint closestPoint = hiddenString.getClosestPoint(string[i]);
+            mesh.addColor(start.lerp(end, (float) (closestPoint.x - tables[index1].x) / (tables[index2].x - tables[index1].x) ));
+        }
+    } else {
+        for (int i = 0; i < string.size(); i++) {
+            mesh.addVertex(string[i]);
+            mesh.addColor( start.lerp(end, (float) i / string.size()) );
+        }
     }
 }
 
