@@ -27,10 +27,26 @@ void testApp::update(){
         index1 = -1;
         index2 = -1;
     }
-    for (int i = 0; i < strings.size(); i++) {
-        strings[i].checkPluck(ofGetMouseX(), ofGetMouseY());
-        strings[i].update();
-        ofPoint p = strings[i].string.getClosestPoint(ofPoint(ofGetMouseX(), ofGetMouseY()));
+
+    
+    
+//    for (int i = 0; i < strings.size(); i++) {
+//
+//        strings[i].checkPluck(ofGetMouseX(), ofGetMouseY());
+//        strings[i].update();
+//        
+//    }
+    
+    list<GuitarString>::iterator i;
+    for (i = strings.begin(); i != strings.end(); i++) {
+
+        i->checkPluck(ofGetMouseX(), ofGetMouseY());
+        i->update();
+        if (!i->checkLife()) {
+            tables[i->index1].isSelected = false;
+            tables[i->index2].isSelected = false;
+            strings.erase(i);
+        }
     }
 }
 
@@ -39,9 +55,18 @@ void testApp::draw(){
     ofBackground(0);
     
     // Draw strings
-    for (int i = 0; i < strings.size(); i++) {
-        strings[i].draw();
+    list<GuitarString>::iterator i;
+    for (i = strings.begin(); i != strings.end(); i++) {
+        i->draw();
     }
+//    for (int i = 0; i < strings.size(); i++) {
+//        //if (strings[i].checkLife()) {
+//            strings[i].draw();
+////        } else {
+////            tables[strings[i].index1].isSelected = false;
+////            tables[strings[i].index2].isSelected = false;
+////        }
+//    }
     
     // Draw tables
     for (int i = 0; i < tables.size(); i++) {
@@ -98,12 +123,22 @@ void testApp::mousePressed(int x, int y, int button){
     for (int i = 0; i < tables.size(); i++) {
         if ((ofGetMouseX() < tables[i].x + tableSize && ofGetMouseX() > tables[i].x - tableSize)
             && (ofGetMouseY() < tables[i].y + tableSize && ofGetMouseY() > tables[i].y - tableSize)) {
-            tables[i].isSelected = true;
             if (i < 9) {
+//                if (index1 != -1) {
+//                    tables[index1].isSelected = false;
+//                }
                 index1 = i;
             } else {
+//                if (index2 != -1) {
+//                    tables[index2].isSelected = false;
+//                }
                 index2 = i;
             }
+            tables[i].isSelected = true;
+            //tables[i].isSelected = !tables[i].isSelected;
+                
+
+            
         }
     }
 

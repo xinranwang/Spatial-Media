@@ -18,10 +18,12 @@
 class GuitarString {
 public:
     GuitarString(int _index1, int _index2, int _stringsEdge, vector<StandingTable> _tables);
+    ~GuitarString();
     void update();
     void checkPluck(float _x, float _y);
     void draw();
     void makeString();
+    bool checkLife();
     
     int index1;
     int index2;
@@ -38,6 +40,9 @@ public:
     ofVec2f gravity;
     float pluckDist = 20;
     bool prePluck = false;
+    
+    int lifetime = ofRandom(5, 10);
+    int age = 0;
 };
 
 #endif /* defined(__FundRaiser__GuitarString__) */

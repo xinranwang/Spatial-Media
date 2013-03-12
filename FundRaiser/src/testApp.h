@@ -32,7 +32,8 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     vector<StandingTable> tables;
-    vector<GuitarString> strings;
+    //vector<GuitarString> strings;
+    list<GuitarString> strings;
     
     int index1 = -1;
     int index2 = -1;

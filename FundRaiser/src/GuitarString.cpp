@@ -30,6 +30,10 @@ GuitarString::GuitarString(int _index1, int _index2, int _stringsEdge, vector<St
     mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
 }
 
+GuitarString::~GuitarString() {
+    
+}
+
 void GuitarString::checkPluck(float _x, float _y) {
     
     spring.b.applyForce(gravity);
@@ -39,16 +43,30 @@ void GuitarString::checkPluck(float _x, float _y) {
     if (ofDist(_x, _y, closestPoint.x, closestPoint.y) < 5) {
         prePluck = true;
     }
+    
     if (ofDist(_x, _y, closestPoint.x, closestPoint.y) < pluckDist && prePluck) {
         spring.b.location.set(_x, _y);
         spring.anchor.set(closestPoint);
         spring.b.clicked(_x, _y);
+        
+        //age++;
     } else {
         spring.b.stopDragging();
-        prePluck = false;
+        if (prePluck) {
+            age++;
+            prePluck = false;
+        }
+        
     }
 
 
+}
+
+bool GuitarString::checkLife() {
+    if (age < lifetime) {
+        return true;
+    }
+    return false;
 }
 
 void GuitarString::update() {
@@ -64,7 +82,7 @@ void GuitarString::update() {
         for (int i = 0; i < string.size(); i++) {
             mesh.addVertex(string[i]);
             ofPoint closestPoint = hiddenString.getClosestPoint(string[i]);
-            mesh.addColor(start.lerp(end, (float) (closestPoint.x - tables[index1].x) / (tables[index2].x - tables[index1].x) ));
+            mesh.addColor(start.lerp(end, (float) (closestPoint.y - tables[index1].y) / (tables[index2].y - tables[index1].y) ));
         }
     } else {
         for (int i = 0; i < string.size(); i++) {
