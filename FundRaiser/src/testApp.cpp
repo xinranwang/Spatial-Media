@@ -54,7 +54,16 @@ void testApp::draw(){
         }
         tables[i].draw();
         
+        // Draw dots
         ofSetColor(100);
+        ofFill();
+        if (tables[i].y < ofGetHeight() / 2) {
+            ofCircle(tables[i].x, stringsEdge, 5);
+        } else {
+            ofCircle(tables[i].x, ofGetHeight() - stringsEdge, 5);
+        }
+        // Smoothing with noFill
+        ofNoFill();
         if (tables[i].y < ofGetHeight() / 2) {
             ofCircle(tables[i].x, stringsEdge, 5);
         } else {

@@ -25,6 +25,10 @@ void StandingTable::draw() {
     } else
         ofSetColor(200);
     
+    ofSetLineWidth(1);
     ofFill();
+    ofCircle(x, y, tableSize / 2);
+    // Smoothing with noFill
+    ofNoFill();
     ofCircle(x, y, tableSize / 2);
 }
