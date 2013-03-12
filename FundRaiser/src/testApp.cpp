@@ -18,9 +18,6 @@ void testApp::setup(){
             tables.push_back( StandingTable::StandingTable( 150 + (i - 9) * tableDist / 2, ofGetHeight() - margin - ( (i - 9) % 2) * tableDist, tableSize) );
         }
     }
-    
-    spring = Spring(ofGetWidth() / 2 , 10, 0);
-    bob = Bob(ofGetWidth() / 2, 100);
 }
 
 //--------------------------------------------------------------
@@ -34,15 +31,12 @@ void testApp::update(){
         strings[i].checkPluck(ofGetMouseX(), ofGetMouseY());
         strings[i].update();
         ofPoint p = strings[i].string.getClosestPoint(ofPoint(ofGetMouseX(), ofGetMouseY()));
-        //cout << "string" << i << ": " << p.x << ", " << p.y << endl;
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     ofBackground(0);
-//    StandingTable *table = new StandingTable(50, 50, tableSize);
-//    table->draw();
     
     // Draw strings
     for (int i = 0; i < strings.size(); i++) {
@@ -67,16 +61,7 @@ void testApp::draw(){
             ofCircle(tables[i].x, ofGetHeight() - stringsEdge, 5);
         }
     }
-    
-    
-    ofVec2f gravity(0, 2);
-    bob.applyForce(gravity);
-    spring.connect(bob);
-    spring.constrainLength(bob, 0, 200);
-    bob.update();
-    bob.drag(ofGetMouseX(), ofGetMouseY());
-    spring.display();
-    bob.display();
+
 }
 
 //--------------------------------------------------------------

@@ -25,17 +25,19 @@ public:
     
     int index1;
     int index2;
-    //ofColor color;
+
     int stringsEdge;
     ofPolyline string;
+    ofPolyline hiddenString;
     ofMesh mesh;
     //ofPoint controlPoint;
     vector<StandingTable> tables;
     
-    Bob bob;
+    //Bob bob;
     Spring spring;
     ofVec2f gravity;
     float pluckDist = 20;
+    bool prePluck = false;
 };
 
 #endif /* defined(__FundRaiser__GuitarString__) */

@@ -15,37 +15,37 @@ GuitarString::GuitarString(int _index1, int _index2, int _stringsEdge, vector<St
     stringsEdge = _stringsEdge;
     tables = _tables;
     ofVec2f stringVec(tables[index2].x - tables[index1].x, ofGetHeight() - stringsEdge * 2);
-    gravity = stringVec.getPerpendicular() * 2;
-    cout << gravity.x << ":" << gravity.y << endl;
+    gravity = stringVec.getPerpendicular();
     
     //controlPoint.set(tables[index2].x, ofGetHeight() - stringsEdge);
-    bob = Bob(tables[index2].x, ofGetHeight() - stringsEdge);
-    spring = Spring(tables[index2].x, ofGetHeight() - stringsEdge, 0);
+    Bob bob(tables[index2].x, ofGetHeight() - stringsEdge);
+    spring = Spring(tables[index2].x, ofGetHeight() - stringsEdge, 0, 0, pluckDist, bob);
     
     makeString();
+    
+    hiddenString.addVertex(tables[index1].x, stringsEdge);
+    hiddenString.addVertex(tables[index2].x, ofGetHeight() - stringsEdge);
+    
     mesh.setupIndicesAuto();
     mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
 }
 
 void GuitarString::checkPluck(float _x, float _y) {
-    bob.applyForce(gravity);
-    spring.connect(bob);
-    spring.constrainLength(bob, 0, 200);
-    bob.update();
-    bob.drag(_x, _y);
     
-    ofPoint closestPoint = string.getClosestPoint(ofPoint(_x, _y));
-    if (ofDist(_x, _y, closestPoint.x, closestPoint.y) < pluckDist) {
-        bob.location.set(_x, _y);
+    spring.b.applyForce(gravity);
+    spring.update(_x, _y);
+    
+    ofPoint closestPoint = hiddenString.getClosestPoint(ofPoint(_x, _y));
+    if (ofDist(_x, _y, closestPoint.x, closestPoint.y) < 5) {
+        prePluck = true;
+    }
+    if (ofDist(_x, _y, closestPoint.x, closestPoint.y) < pluckDist && prePluck) {
+        spring.b.location.set(_x, _y);
         spring.anchor.set(closestPoint);
-        bob.clicked(_x, _y);
-        
-        //controlPoint.set(_x, _y);
+        spring.b.clicked(_x, _y);
     } else {
-        //controlPoint.set(tables[index2].x, ofGetHeight() - stringsEdge);
-//        bob.location.set(tables[index2].x, ofGetHeight() - stringsEdge);
-//        spring.anchor.set(tables[index2].x, ofGetHeight() - stringsEdge);
-        bob.stopDragging();
+        spring.b.stopDragging();
+        prePluck = false;
     }
 
 
@@ -67,8 +67,8 @@ void GuitarString::update() {
 
 void GuitarString::makeString() {
     string.addVertex(tables[index1].x, stringsEdge);
-    //string.bezierTo(controlPoint, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
-    string.bezierTo(bob.location, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
+
+    string.bezierTo(spring.b.location, ofPoint(tables[index2].x, ofGetHeight() - stringsEdge), ofPoint(tables[index2].x, ofGetHeight() - stringsEdge));
     
 }
 
@@ -81,8 +81,7 @@ void GuitarString::draw() {
     ofSetColor(tables[index2].color);
     ofLine(tables[index2].x, ofGetHeight() - stringsEdge, tables[index2].x, tables[index2].y);
 
-    //string.draw();
     mesh.draw();
-    bob.display();
-    spring.display();
+//    spring.b.display();
+//    spring.display();
 }
