@@ -28,6 +28,7 @@ void testApp::update(){
         index2 = -1;
     }
     for (int i = 0; i < strings.size(); i++) {
+        strings[i].checkPluck(ofGetMouseX(), ofGetMouseY());
         strings[i].update();
         ofPoint p = strings[i].string.getClosestPoint(ofPoint(ofGetMouseX(), ofGetMouseY()));
         cout << "string" << i << ": " << p.x << ", " << p.y << endl;
@@ -36,7 +37,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofBackground(255);
+    ofBackground(0);
 //    StandingTable *table = new StandingTable(50, 50, tableSize);
 //    table->draw();
     
