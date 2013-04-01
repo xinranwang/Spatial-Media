@@ -28,8 +28,9 @@ void StandingTable::draw() {
     
     if (isSelected || isHovered) {
         ofSetColor(color);
-    } else
+    } else {
         ofSetColor(200);
+    }
     
     ofSetLineWidth(1);
     ofFill();

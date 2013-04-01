@@ -7,6 +7,7 @@
 #include "Bob.h"
 #include "Spring.h"
 #include <iostream>
+#include "ofxTSPSReceiver.h"
 
 static const int tableSize = 48;
 static const int roomSize = 360;
@@ -32,6 +33,8 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+        void audioOut(float * input, int bufferSize, int nChannels);
+    
     vector<StandingTable> tables;
     //vector<GuitarString> strings;
     list<GuitarString> strings;
@@ -43,7 +46,28 @@ class testApp : public ofBaseApp{
     Spring spring;
     
     ofxSimpleProjectionMapper mapper;
-    ofFbo canvas;
     bool bDrawBounds;
     bool projectionMode;
+    
+    
+    float maxLength;
+    float minLength;
+    
+    ofSoundStream soundStream;
+    
+    float 	pan;
+    int		sampleRate;
+    float 	volumeMax;
+    
+    vector <float> lAudio;
+    vector <float> rAudio;
+    
+    //------------------- for the simple sine wave synthesis
+    float 	targetFrequency;
+    float 	phase;
+    float 	phaseAdder;
+    float 	phaseAdderTarget;
+    
+    // create TSPS Receiver object
+    ofxTSPS::Receiver tspsReceiver;
 };

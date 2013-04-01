@@ -19,9 +19,9 @@ class GuitarString {
 public:
     GuitarString(int _index1, int _index2, int _stringsEdge, vector<StandingTable> _tables);
     ~GuitarString();
-    void update();
+    void update(bool isProjectionMode = false);
     void checkPluck(float _x, float _y);
-    void draw();
+    void draw(bool isProjectionMode);
     void makeString();
     bool checkLife();
     
@@ -43,6 +43,9 @@ public:
     
     int lifetime = ofRandom(5, 10);
     int age = 0;
+    
+    float phaseAdder = 0;
+    float phase = 0;
 };
 
 #endif /* defined(__FundRaiser__GuitarString__) */

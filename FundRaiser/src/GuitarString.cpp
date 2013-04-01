@@ -69,13 +69,24 @@ bool GuitarString::checkLife() {
     return false;
 }
 
-void GuitarString::update() {
+void GuitarString::update(bool isProjectionMode) {
     string.clear();
     makeString();
     mesh.clear();
+    ofFloatColor start;
+    ofFloatColor end;
     
-    ofFloatColor start = tables[index1].color;
-    ofFloatColor end = tables[index2].color;
+    if (isProjectionMode) {
+        lifetime = 10000; // bump up lifetime so the string stays up for testing while projected
+        start = ofColor(0, 255, 100);
+        end = ofColor(0, 100, 255);
+    } else {
+        if (lifetime > 10) {
+            lifetime = ofRandom(5, 10); // in the case where it had previously been projected
+        }
+        start = tables[index1].color;
+        end = tables[index2].color;
+    }
     
     // if string is not curved, color mapping is different
     if (prePluck) {
@@ -102,14 +113,21 @@ void GuitarString::makeString() {
     }
 }
 
-void GuitarString::draw() {
-    
+void GuitarString::draw(bool isProjectionMode) {
+    if (isProjectionMode) {
+        update(isProjectionMode); // make strings specific colors for projection
+    }
     ofNoFill();
-    ofSetLineWidth(3);
-    ofSetColor(tables[index1].color);
-    ofLine(tables[index1].x, tables[index1].y, tables[index1].dot.x, tables[index1].dot.y);
-    ofSetColor(tables[index2].color);
-    ofLine(tables[index2].dot.x, tables[index2].dot.y, tables[index2].x, tables[index2].y);
+    if (isProjectionMode) {
+        ofSetLineWidth(3); // option to have different string width for projection
+    } else {
+        ofSetLineWidth(3);
+        // draw table lines only when not in projection mode
+        ofSetColor(tables[index1].color);
+        ofLine(tables[index1].x, tables[index1].y, tables[index1].dot.x, tables[index1].dot.y);
+        ofSetColor(tables[index2].color);
+        ofLine(tables[index2].dot.x, tables[index2].dot.y, tables[index2].x, tables[index2].y);
+    }
 
     mesh.draw();
 //    spring.b.display();
