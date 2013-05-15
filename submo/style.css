@@ -1,0 +1,158 @@
+body {
+/*  padding: 50px;*/
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #000000;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+	font-size:50px;
+	padding: 50px, 0,0,0;
+	margin:auto 0;
+	text-align: center;
+	color: #FFFFFF;
+}
+canvas{
+  padding: 0;
+  margin: 0;
+}
+#test {
+  position: absolute;
+}
+#myCanvas {
+  position: absolute;
+  top: 650px;
+  left: 0;
+  width: 960px;
+  height: 500px;
+  z-index: 500;
+}
+#myCanvas0, #myCanvas1, #myCanvas2, #myCanvas3, #myCanvas4, #myCanvas5, #myCanvas6 {
+  position: absolute !important;
+}
+#myCanvas0{
+    left: 54px !important;
+}
+#myCanvas1{
+    left: 256px !important;
+}
+#myCanvas2{
+    left: 321px !important;
+}
+#myCanvas3{
+    left: 454px !important;
+}
+#myCanvas4{
+    left: 654px !important;
+}
+#myCanvas5{
+    left: 854px !important;
+}
+#myCanvas6{
+    left: 920px !important;
+}
+#yourPhoto {
+    position: absolute;
+	z-index: 1000;
+	top: 660px;
+  width: 960px;
+  font-size: 20px;
+  margin: 0, auto;
+  text-align: center;
+  color: #dddddd;
+}
+.container {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left:0;
+  width: 980px;
+  height: 440px;
+}
+p.clicked {
+  clear: both;
+   position: absolute;
+   top:410px;
+   color: #688E41;
+   font-size: 24px;
+}
+button.done {
+  position: absolute;
+  top: 520px;
+  left: 860px;
+  width: 100px;
+  height: 50px;
+  background: #688E41;
+  border-width: 5px;
+  border-color: #688E41;
+  font-size: 24px;
+  color: #dddddd;
+  font-weight: 400;
+}
+.capture{
+  background: transparent url(images/btn_click.png) no-repeat scroll center bottom;
+  border-width: 5px;
+  border-color: #688E41;
+  cursor:pointer;
+}
+.capture:hover {
+  background: transparent url(images/btn_hover.png) no-repeat scroll center bottom;
+}
+.capture:active {
+  background: transparent url(images/btn_saved.png) no-repeat scroll center bottom;
+}
+.capture.capture0, #myCanvas0{
+  position: relative;
+  top: 210px;
+  left: 54px;
+  width: 172px;
+  height: 220px;
+}
+.capture.capture1, #myCanvas1{
+  position: relative;
+  top: 210px;
+  left: 84px;
+  width: 24px;
+  height: 220px;
+}
+.capture.capture2, #myCanvas2{
+  position: relative;
+  top: 210px;
+  left: 125px;
+  width: 105px;
+  height: 220px;
+}
+.capture.capture3, #myCanvas3{
+  position: relative;
+  top: 210px;
+  left: 153px;
+  width: 126px;
+  height: 220px;
+}
+.capture.capture4, #myCanvas4{
+  position: relative;
+  top: 210px;
+  left: 227px;
+  width: 172px;
+  height: 220px;
+}
+.capture.capture5, #myCanvas5{
+  position: relative;
+  top: 210px;
+  left: 255px;
+  width: 27px;
+  height: 220px;
+}
+.capture.capture6, #myCanvas6{
+  position: relative;
+  top: 210px;
+  left: 294px;
+  width: 45px;
+  height: 220px;
+}
